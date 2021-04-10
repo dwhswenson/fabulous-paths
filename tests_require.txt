@@ -1,0 +1,4 @@
+# install with conda install -y --file tests_require.txt
+openmmtools
+sqlalchemy
+dill
