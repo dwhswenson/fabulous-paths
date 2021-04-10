@@ -1,0 +1,56 @@
+name: "Tests"
+
+on:
+  pull_request:
+    branches:
+      - main
+      - stable
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  schedule:
+    - cron: "25 5 * * *"
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+jobs:
+  test_suite:
+    runs-on: ubuntu-latest
+    name: "Tests"
+    strategy:
+      matrix:
+        CONDA_PY:
+          - 3.9
+          - 3.8
+          - 3.7
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: ${{ matrix.CONDA_PY }}
+      - name: "Install testing tools"
+        run: conda install -y --file tests_require.txt
+      - name: "Install requirements"
+        run: |
+          # these are the bleeding edge requirements
+          python -m pip install https://github.com/openpathsampling/openpathsampling/archive/master.zip
+          python -m pip install https://github.com/openpathsampling/openpathsampling-cli/archive/master.zip
+      - name: "Install"
+        run: python -m pip install -e .
+      - name: "Versions"
+        run: conda list
+      - name: "Tests"
+        run: |
+          python -c "import paths_fabulous"
+          python -c "import paths_cli_plugins.fabulous"
+          py.test -vv --cov --cov-report xml:cov.xml
+      - name: "Report coverage"
+        run: bash <(curl -s https://codecov.io/bash)
+
+
