@@ -67,11 +67,11 @@ storage = Storage('test_data.db', mode='w')
 import mdtraj as md
 phi = MDTrajFunctionCV(md.compute_dihedrals,
                        topology=engine.topology,
-                       atom_indices=[[4, 6, 8, 14]]).named("phi")
+                       indices=[[4, 6, 8, 14]]).named("phi")
 
 psi = MDTrajFunctionCV(md.compute_dihedrals,
                        topology=engine.topology,
-                       atom_indices=[[6, 8, 14, 16]]).named("psi")
+                       indices=[[6, 8, 14, 16]]).named("psi")
 
 storage.save([phi, psi])
 

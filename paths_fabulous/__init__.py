@@ -1,4 +1,6 @@
 from tqdm.auto import tqdm
+import pandas as pd
+import numpy as np
 
 def extract_CV(traj, cvs):
     """Create a CV dataframe for FABULOUS from an OPS trajectory and CVs.
@@ -9,7 +11,7 @@ def extract_CV(traj, cvs):
         each row is a snapshot
     """
     columns = [cv.name for cv in cvs]
-    results = np.array([cv(traj) for cv in cvs])
+    results = np.array([cv(traj) for cv in cvs]).T
     return pd.DataFrame(results, columns=columns)
 
 
@@ -50,7 +52,6 @@ def extract_OPS(steps, ref, keep, cvs):
         input steps
     """
     keep_atoms = None
-    # TODO: add progress bar to this (use OPS progress?)
     desc1 = "Identifying trajectories"
     weighted_trajs = step_to_weighted_trajectories(tqdm(steps, desc=desc1))
     if len(weighted_trajs) != 1:
