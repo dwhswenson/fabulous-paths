@@ -35,7 +35,7 @@ jobs:
           auto-update-conda: true
           python-version: ${{ matrix.CONDA_PY }}
       - name: "Install testing tools"
-        run: conda install -y --file tests_require.txt
+        run: conda install -c conda-forge -y --file tests_require.txt
       - name: "Install requirements"
         run: |
           # these are the bleeding edge requirements
