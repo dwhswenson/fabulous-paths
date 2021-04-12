@@ -1,4 +1,4 @@
-name: "Tests"
+name: "tests"
 
 on:
   pull_request:
@@ -47,12 +47,12 @@ jobs:
         run: conda list
       - name: "Create test file"
         run: |
-          pushd paths_fabulous/tests/test_data
+          pushd fabulous_paths/tests/test_data
           python generate_test_data.py
           popd
       - name: "Tests"
         run: |
-          python -c "import paths_fabulous"
+          python -c "import fabulous_paths"
           python -c "import paths_cli_plugins.fabulous"
           py.test -vv --cov --cov-report xml:cov.xml
       - name: "Report coverage"

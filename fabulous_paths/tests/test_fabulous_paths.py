@@ -9,8 +9,8 @@ import os
 
 import pkg_resources
 
-from paths_fabulous import *
-from paths_fabulous import _get_keep_atoms
+from fabulous_paths import *
+from fabulous_paths import _get_keep_atoms
 
 BACKBONE = [4, 5, 6, 8, 14, 15, 16, 18]
 
@@ -20,7 +20,7 @@ def datafile():
     from openpathsampling.experimental import storage
     paths = storage.monkey_patch_all(paths)
     filename = pkg_resources.resource_filename(
-        'paths_fabulous',
+        'fabulous_paths',
         os.path.join('tests', 'test_data', 'test_data.db')
     )
     datafile = storage.Storage(filename, mode='r')
