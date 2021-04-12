@@ -1,4 +1,6 @@
 # install with conda install -y --file tests_require.txt
+pytest
+pytest-cov
 openmmtools
 sqlalchemy
 dill
