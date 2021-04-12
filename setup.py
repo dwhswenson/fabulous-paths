@@ -123,7 +123,7 @@ def write_installed_version_py(filename="_installed_version.py",
 
 if __name__ == "__main__":
     # TODO: only write version.py under special circumstances
-    write_installed_version_py(src_dir='paths_fabulous')
+    write_installed_version_py(src_dir='fabulous_paths')
     # write_version_py(os.path.join('autorelease', 'version.py'))
     setup()
 
