@@ -59,6 +59,8 @@ def extract_OPS(steps, ref, keep, cvs):
     weighted_trajs = steps_to_weighted_trajectories(tqdm(steps, desc=desc1),
                                                     ensembles)
     if len(weighted_trajs) != 1:
+        # NOTE: this is currently impossible, but might become possible when
+        # OPS fixes steps_to_weighted to not require ensembles as input
         raise RuntimeError("FABULOUS requires all steps from the same",
                            f"ensemble. Found {len(weighted_trajs)} ",
                            "ensembles.")

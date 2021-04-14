@@ -1,3 +1,4 @@
+import os
 import click
 from fabulous_paths import main
 import mdtraj as md
@@ -8,11 +9,11 @@ from paths_cli.parameters import INPUT_FILE, MULTI_CV
     short_help="Analysis using the FABULOUS framework"
 )
 @INPUT_FILE.clicked(required=True)
-@MULTI_CV.clicked(required=True)
+@MULTI_CV.clicked(required=True)   # TODO: option to allow --cv-list file?
 @click.option('--ref', type=click.Path(readable=True), required=True,
               help="reference frame for alignment")
 @click.option('--keep-atoms', type=str, required=True,
-              help="atoms to keep")
+              help="atoms to keep")  # TODO: also allow `.npy` files
 @click.option('-c', '--conf', type=click.Path(readable=True), required=True,
               help="FABULOUS configuration file")
 @click.option('-n', '--ngen', type=int,
@@ -26,6 +27,7 @@ def fabulous(input_file, cv, ref, keep_atoms, conf, ngen, results, label):
     cvs = MULTI_CV.get(storage, cv)
     ref = md.load(ref)
     main(storage.steps, cvs, ref, keep_atoms, conf, ngen, results, label)
+
 
 CLI = fabulous
 SECTION = "Analysis"
