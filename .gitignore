@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+test_data.db
+_installed_version.py
+
 # C extensions
 *.so
 
