@@ -1,39 +1,42 @@
  [![tests](https://github.com/dwhswenson/fabulous-paths/actions/workflows/tests.yml/badge.svg)](https://github.com/dwhswenson/fabulous-paths/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/dwhswenson/paths-fabulous/branch/main/graph/badge.svg?token=Mhtza0eAID)](https://codecov.io/gh/dwhswenson/paths-fabulous)
+[![codecov](https://codecov.io/gh/dwhswenson/fabulous-paths/branch/main/graph/badge.svg?token=Mhtza0eAID)](https://codecov.io/gh/dwhswenson/fabulous-paths)
 
-# paths-fabulous
+# fabulous-paths
 
 *Tools to integrate OpenPathSampling and FABULOUS.*
 
-``paths-fabulous`` is a set of tools that bridge between
+``fabulous-paths`` is a set of tools that bridge between
 [OpenPathSampling](http://openpathsampling.org), especially the
 [OpenPathSampling CLI](http://openpathsampling-cli.readthedocs.org), and the
-analysis tool provided by
+analysis tools provided by
 [FABULOUS](https://github.com/Ensing-Laboratory/FABULOUS/).
 
 To learn more about FABULOUS, read the original paper here:
 
-* ???
+* [F. Hooft, A. Pérez de Alba Ortíz, B. Ensing. "Discovering Collective
+  Variables of Molecular Transitions via Genetic Algorithms and Neural
+  Networks." J. Chem. Theory Comput. **17**, 2294
+  (2021).](https://dx.doi.org/10.1021/acs.jctc.0c00981)
 
 ## Installation
 
-``paths-fabulous`` can be installed ... (eventually this will give ``pip`` and
-``conda`` instructions). Installing ``paths-fabulous`` will automatically also
+``fabulous-paths`` can be installed ... (eventually this will give ``pip`` and
+``conda`` instructions). Installing ``fabulous-paths`` will automatically also
 install OpenPathSampling, the OpenPathSampling CLI, and FABULOUS, if you do not
 already have these installed.
 
 ## Citing
 
-When using ``paths-fabulous``, please cite the following papers (for various
+When using ``fabulous-paths``, please cite the following papers (for various
 functionality included):
 
-* **FABULOUS**: ???
-* **OpenPathSampling**: ???
+* **FABULOUS**: https://doi.org/10.1021/acs.jctc.0c00981
+* **OpenPathSampling**: https://doi.org/10.1021/acs.jctc.8b00626
 <!--* **OpenPathSampling CLI**: ???-->
 
 ## Support and Development
 
-``paths-fabulous`` is an open source project, released under the GNU LGPL,
+``fabulous-paths`` is an open source project, released under the GNU LGPL,
 version 3.0 or (at your option) any later version. Development takes place in
 public at http://github.com/openpathsampling/paths-fabulous.
 
