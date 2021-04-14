@@ -10,7 +10,7 @@ import os
 import pkg_resources
 
 from fabulous_paths import *
-from fabulous_paths import _get_keep_atoms
+from fabulous_paths import _get_keep_atoms, _concat_dfs
 
 BACKBONE = [4, 5, 6, 8, 14, 15, 16, 18]
 
@@ -51,12 +51,13 @@ def test_extract_CV(datafile, trajectory_data):
 def test_extract_MD(trajectory_data):
     for traj in trajectory_data:
         # use the first frame as ref; gives us a no-change to test
-        ref = traj.to_mdtraj().atom_slice(BACKBONE)[0]
-        extracted = extract_MD(traj, ref, BACKBONE)
+        ref = traj.to_mdtraj()
+        extracted = extract_MD(traj, ref[0], BACKBONE)
         n_cols_expected = len(BACKBONE) * 3
         assert extracted.shape == (len(traj), n_cols_expected)
         first_frame = extracted.loc[0,:]
-        np.testing.assert_allclose(first_frame, ref.xyz[0].flatten(),
+        sliced_ref = ref.atom_slice(BACKBONE)
+        np.testing.assert_allclose(first_frame, sliced_ref.xyz[0].flatten(),
                                    rtol=1e-6)  # seems we need extra room
 
 @pytest.mark.parametrize('type_', ['str', 'list'])
@@ -65,11 +66,43 @@ def test_get_keep_atoms(trajectory_data, type_):
     topology = trajectory_data[0][0].topology.mdtraj
     np.testing.assert_array_equal(_get_keep_atoms(topology, keep), BACKBONE)
 
-def test_extract_OPS():
-    pytest.skip()
+@mock.patch('fabulous_paths.tqdm', new=lambda x, desc: x)
+def test_extract_OPS(datafile):
+    ref = datafile.steps[0].active[0].trajectory.to_mdtraj()[0]
+    keep = BACKBONE
+    cvs = [datafile.cvs['phi'], datafile.cvs['psi']]
+    dfs = list(extract_OPS(datafile.steps, ref, keep, cvs))
+    assert len(dfs) == len(datafile.steps)
+    for trj_df, cv_df in dfs:
+        # 5 == len(traj)
+        # 2 == len(cvs)
+        assert trj_df.shape == (5, len(BACKBONE) * 3)
+        assert cv_df.shape == (5, 2)
 
 def test_extract_OPS_bad_ensembles():
+    # this can't be tested yet, because it is (temporarily) impossible
     pytest.skip()
 
-def test_main_integration():
-    pytest.skip()
+def test_concat_dfs():
+    sizes = [(4, 2), (4, 3)]
+    dfs = [tuple(pd.DataFrame(np.random.random(size)) for size in sizes)
+           for _ in range(2)]
+    # sanity check
+    for df_pair in dfs:
+        for df, shape in zip(df_pair, sizes):
+            assert df.shape == shape
+
+    trajs, cvs = _concat_dfs(dfs)
+    assert trajs.shape == (8, 2)
+    assert cvs.shape == (8, 3)
+
+def test_main_integration(datafile, tmpdir):
+    # smoke test to ensure that the integration with FABULOUS works
+    ref = datafile.steps[0].active[0].trajectory.to_mdtraj()[0]
+    keep = BACKBONE
+    cvs = [datafile.cvs['phi'], datafile.cvs['psi']]
+    results_dir=tmpdir / "results"
+    label='1'
+    yaml_file=... # TODO
+    main(steps=datafile.steps, cvs=cvs, ref=ref, keep=keep,
+         yaml_file=yaml_file, n_gen=0, results_dir=results_dir, label=label)
