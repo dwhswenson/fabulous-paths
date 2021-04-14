@@ -51,12 +51,13 @@ def test_extract_CV(datafile, trajectory_data):
 def test_extract_MD(trajectory_data):
     for traj in trajectory_data:
         # use the first frame as ref; gives us a no-change to test
-        ref = traj.to_mdtraj().atom_slice(BACKBONE)[0]
+        ref = traj.to_mdtraj()
         extracted = extract_MD(traj, ref, BACKBONE)
         n_cols_expected = len(BACKBONE) * 3
         assert extracted.shape == (len(traj), n_cols_expected)
         first_frame = extracted.loc[0,:]
-        np.testing.assert_allclose(first_frame, ref.xyz[0].flatten(),
+        sliced_ref = ref.atom_slice(BACKBONE)
+        np.testing.assert_allclose(first_frame, sliced_ref.xyz[0].flatten(),
                                    rtol=1e-6)  # seems we need extra room
 
 @pytest.mark.parametrize('type_', ['str', 'list'])
