@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 test_data.db
+_installed_version.py
 
 # C extensions
 *.so

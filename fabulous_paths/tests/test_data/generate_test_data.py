@@ -11,6 +11,7 @@ will be accepted).
 This file is used in the test suite.
 """
 
+import mdtraj as md
 import openmmtools
 import openpathsampling as paths
 
@@ -60,11 +61,12 @@ sample = paths.Sample(replica=0,
                       trajectory=initial_trajectory)
 initial_conditions = paths.SampleSet([sample])
 
+ref_frame = initial_trajectory.to_mdtraj()[0]
+ref_frame.save("ref.pdb")
 
 ### RUN PATH SAMPLING ######################################################
 storage = Storage('test_data.db', mode='w')
 # add CVs
-import mdtraj as md
 phi = MDTrajFunctionCV(md.compute_dihedrals,
                        topology=engine.topology,
                        indices=[[4, 6, 8, 14]]).named("phi")
