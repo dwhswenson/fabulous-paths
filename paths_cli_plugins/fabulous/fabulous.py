@@ -29,6 +29,11 @@ def fabulous(input_file, cv, ref, keep_atoms, conf, ngen, results, label):
     main(storage.steps, cvs, ref, keep_atoms, conf, ngen, results, label)
 
 
+# _mock_command used in docs generation
+_mock_command = click.Group(name='openpathsampling',
+                            commands={'fabulous': fabulous})
+
+
 CLI = fabulous
 SECTION = "Analysis"
 OPS_VERSION = (1, 5)
