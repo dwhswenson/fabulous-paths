@@ -1,0 +1,5 @@
+sphinx
+openpathsampling-cli
+# fabulous-cvs
+autodocksumm
+sphinx-click
