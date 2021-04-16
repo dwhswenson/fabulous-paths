@@ -40,7 +40,7 @@ functionality included):
 version 3.0 or (at your option) any later version. Development takes place in
 public at http://github.com/openpathsampling/paths-fabulous.
 
-As this package is a rather thin wrapper, problems are more likely to arise
+As this package is mostly a thin adapter, problems are more likely to arise
 through either OpenPathSampling or FABULOUS. Please first contact those
 packages through their help forums:
 

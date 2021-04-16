@@ -10,17 +10,25 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath('.'))
+
+import pkg_resources
+import packaging.version
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'paths-fabulous'
+project = 'fabulous-paths'
 copyright = '2021, David W.H. Swenson'
 author = 'David W.H. Swenson'
 
+# The full version, including alpha/beta/rc tags
+release = pkg_resources.get_distribution('openpathsampling-cli').version
+version = packaging.version.Version(release).base_version
+
+master_doc = 'index'
 
 # -- General configuration ---------------------------------------------------
 
@@ -28,6 +36,11 @@ author = 'David W.H. Swenson'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.napoleon',
+    'autodocsumm',
+    'sphinx_click.ext',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -37,6 +50,8 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+
+autosummary_generate = True
 
 
 # -- Options for HTML output -------------------------------------------------

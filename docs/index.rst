@@ -3,15 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to paths-fabulous's documentation!
-==========================================
-
-``paths-fabulous`` is the bridge between OpenPathSampling (and especially
-the OpenPathSampling CLI) and FABULOUS. This provides a tool
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+   usage
+   api
 
 
 
