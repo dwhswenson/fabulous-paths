@@ -1,1 +1,1 @@
-PACKAGE_IMPORT_NAME="fabulous_paths"
+PACKAGE_IMPORT_NAME=fabulous_paths
