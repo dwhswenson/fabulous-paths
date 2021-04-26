@@ -1,3 +1,4 @@
+ [![Documentation Status](https://readthedocs.org/projects/fabulous-paths/badge/?version=latest)](https://fabulous-paths.readthedocs.io/en/latest/?badge=latest)
  [![tests](https://github.com/dwhswenson/fabulous-paths/actions/workflows/tests.yml/badge.svg)](https://github.com/dwhswenson/fabulous-paths/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/gh/dwhswenson/fabulous-paths/branch/main/graph/badge.svg?token=Mhtza0eAID)](https://codecov.io/gh/dwhswenson/fabulous-paths)
 
