@@ -1,2 +1,5 @@
 python -m pip install sqlalchemy dill pytest
+pushd fabulous_paths/tests/test_data
+python generate_test_data.py
+popd
 py.test --pyargs fabulous_paths
