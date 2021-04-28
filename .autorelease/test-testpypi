@@ -1,5 +1,5 @@
 python -m pip install sqlalchemy dill pytest
-pushd fabulous_paths/tests/test_data
-python generate_test_data.py
-popd
+python -c "import fabulous_paths"
+python -c "import paths_cli_plugins.fabulous"
 py.test --pyargs fabulous_paths
+openpathsampling  fabulous --help

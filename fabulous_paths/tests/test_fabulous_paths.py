@@ -23,6 +23,8 @@ def datafile():
         'fabulous_paths',
         os.path.join('tests', 'test_data', 'test_data.db')
     )
+    if not os.path.exists(filename):
+        pytest.skip("Test file missing")
     datafile = storage.Storage(filename, mode='r')
     return datafile
 
